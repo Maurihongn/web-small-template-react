@@ -138,8 +138,8 @@ export default function (plop) {
       actions.push(
         {
           type: "add",
-          path: `${basePath}/views/{{pascalCase featureName}}View.tsx`,
-          templateFile: "plop-templates/feature/view.hbs",
+          path: `${basePath}/pages/{{pascalCase featureName}}Page.tsx`, // Carpeta pages, sufijo Page
+          templateFile: "plop-templates/feature/page.hbs", // Renombraremos el template también
         },
         {
           type: "add",

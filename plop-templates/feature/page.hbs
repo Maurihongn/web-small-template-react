@@ -1,6 +1,6 @@
 import { use{{pascalCase featureName}}List } from '../hooks/use{{pascalCase featureName}}';
 
-export const {{pascalCase featureName}}View = () => {
+export const {{pascalCase featureName}}Page = () => {
   const { data, isLoading, isError } = use{{pascalCase featureName}}List();
 
   if (isLoading) return <div>Cargando {{lowerCase featureName}}...</div>;
