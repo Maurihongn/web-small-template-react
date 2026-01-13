@@ -1,3 +1,4 @@
+import { DashboardPage } from "@/features/dashboard/views/DashboardPage";
 import { ForbiddenPage } from "@/shared/views/errors/ForbiddenPage";
 import { NotFoundPage } from "@/shared/views/errors/NotFoundPage";
 import {
@@ -31,7 +32,6 @@ const RequireAuth = () => {
   return isAuth ? <Outlet /> : <Navigate to="/auth/login" />;
 };
 const LoginPage = () => <h1>Login Screen</h1>;
-const DashboardPage = () => <h1>Dashboard</h1>;
 const UsersPage = () => <h1>Users Management</h1>;
 
 export const Routing = () => {
