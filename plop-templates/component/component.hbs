@@ -1,0 +1,27 @@
+import { cn } from '@/shared/lib/utils'; // Asumiendo que usas shadcn/ui utils
+
+interface {{pascalCase name}}Props extends React.HTMLAttributes<HTMLDivElement> {
+  // Define tus props aquí
+  variant?: 'default' | 'outline';
+}
+
+export const {{pascalCase name}} = ({ 
+  className, 
+  variant = 'default', 
+  children,
+  ...props 
+}: {{pascalCase name}}Props) => {
+  return (
+    <div 
+      className={cn(
+        "p-4 rounded-md border", // Estilos base
+        variant === 'outline' && "border-gray-200 bg-transparent",
+        variant === 'default' && "bg-white shadow-sm",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+};

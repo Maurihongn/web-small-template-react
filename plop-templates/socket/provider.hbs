@@ -1,0 +1,65 @@
+import { useEffect, useState, ReactNode } from 'react';
+import { HubConnection, HubConnectionState } from '@microsoft/signalr';
+
+// 🔌 IMPORTS DINÁMICOS (Paths calculados por Plop)
+{{#if isShared}}
+// Caso Shared: Ruta absoluta a src/shared
+import { create{{pascalCase name}}Connection } from '@/shared/sockets/{{kebabCase name}}/{{kebabCase name}}.socket';
+import { {{pascalCase name}}SocketContext } from '@/shared/sockets/{{kebabCase name}}/{{kebabCase name}}.context';
+{{else}}
+// Caso Feature: Ruta relativa subiendo un nivel (providers -> sockets)
+import { create{{pascalCase name}}Connection } from '../sockets/{{kebabCase name}}/{{kebabCase name}}.socket';
+import { {{pascalCase name}}SocketContext } from '../sockets/{{kebabCase name}}/{{kebabCase name}}.context';
+{{/if}}
+
+// TODO: Importar tu store de autenticación para sacar el token real
+// import { useAuthStore } from '@/app/stores/auth.store';
+
+interface {{pascalCase name}}ProviderProps {
+  children: ReactNode;
+}
+
+export const {{pascalCase name}}SocketProvider = ({ children }: {{pascalCase name}}ProviderProps) => {
+  const [connection, setConnection] = useState<HubConnection | null>(null);
+  const [isConnected, setIsConnected] = useState(false);
+  
+  // const token = useAuthStore(s => s.token); // Ejemplo
+
+  useEffect(() => {
+    // 1. Configurar URL y Token
+    const HUB_URL = import.meta.env.VITE_API_URL + '/hubs/{{kebabCase name}}';
+    const tokenPlaceholder = 'token-placeholder'; // Reemplazar con variable real
+
+    // 2. Crear instancia
+    const newConnection = create{{pascalCase name}}Connection(HUB_URL, tokenPlaceholder);
+
+    // 3. Iniciar conexión
+    const startConnection = async () => {
+      try {
+        await newConnection.start();
+        console.log('✅ Socket {{pascalCase name}} Conectado');
+        setIsConnected(true);
+      } catch (err) {
+        console.error('❌ Error conexión {{pascalCase name}}:', err);
+        // Opcional: Lógica de reintento manual si falla el start inicial
+      }
+    };
+
+    setConnection(newConnection);
+    startConnection();
+
+    // 4. Cleanup al desmontar el provider
+    return () => {
+      if (newConnection.state === HubConnectionState.Connected) {
+        newConnection.stop();
+        console.log('🛑 Socket {{pascalCase name}} Desconectado');
+      }
+    };
+  }, []); // Agregar [token] a dependencias si necesitas reconectar al cambiar de usuario
+
+  return (
+    <{{pascalCase name}}SocketContext.Provider value=\{{ connection, isConnected }}>
+      {children}
+    </{{pascalCase name}}SocketContext.Provider>
+  );
+};

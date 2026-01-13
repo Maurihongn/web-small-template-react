@@ -1,0 +1,41 @@
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { 
+  get{{pascalCase featureName}}List, 
+  get{{pascalCase featureName}}ById, 
+  create{{pascalCase featureName}} 
+} from '../api/{{kebabCase featureName}}.service';
+
+// 🔑 Keys Factory: Centraliza las keys para invalidación
+export const {{camelCase featureName}}Keys = {
+  all: [{{#if moduleName}}'{{kebabCase moduleName}}', {{/if}}'{{kebabCase featureName}}'] as const,
+  lists: () => [...{{camelCase featureName}}Keys.all, 'list'] as const,
+  details: () => [...{{camelCase featureName}}Keys.all, 'detail'] as const,
+  detail: (id: string) => [...{{camelCase featureName}}Keys.details(), id] as const,
+};
+
+export const use{{pascalCase featureName}}List = () => {
+  return useQuery({
+    queryKey: {{camelCase featureName}}Keys.lists(),
+    queryFn: get{{pascalCase featureName}}List,
+  });
+};
+
+export const use{{pascalCase featureName}}Detail = (id: string) => {
+  return useQuery({
+    queryKey: {{camelCase featureName}}Keys.detail(id),
+    queryFn: () => get{{pascalCase featureName}}ById(id),
+    enabled: !!id,
+  });
+};
+
+export const useCreate{{pascalCase featureName}} = () => {
+  const queryClient = useQueryClient();
+  
+  return useMutation({
+    mutationFn: create{{pascalCase featureName}},
+    onSuccess: () => {
+      // Invalida la lista para refrescar datos automáticamente
+      queryClient.invalidateQueries({ queryKey: {{camelCase featureName}}Keys.lists() });
+    },
+  });
+};

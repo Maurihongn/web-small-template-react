@@ -1,0 +1,18 @@
+import { createContext, useContext } from 'react';
+import { HubConnection } from '@microsoft/signalr';
+
+export interface {{pascalCase name}}SocketState {
+  connection: HubConnection | null;
+  isConnected: boolean;
+  // TODO: Agrega aquí los mensajes que recibas en tiempo real
+}
+
+export const {{pascalCase name}}SocketContext = createContext<{{pascalCase name}}SocketState | undefined>(undefined);
+
+export const use{{pascalCase name}}Socket = () => {
+  const context = useContext({{pascalCase name}}SocketContext);
+  if (!context) {
+    throw new Error('use{{pascalCase name}}Socket debe usarse dentro de un {{pascalCase name}}SocketProvider');
+  }
+  return context;
+};

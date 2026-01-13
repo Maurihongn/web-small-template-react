@@ -1,0 +1,27 @@
+import { use{{pascalCase featureName}}List } from '../hooks/use{{pascalCase featureName}}';
+
+export const {{pascalCase featureName}}View = () => {
+  const { data, isLoading, isError } = use{{pascalCase featureName}}List();
+
+  if (isLoading) return <div>Cargando {{lowerCase featureName}}...</div>;
+  if (isError) return <div>Error al cargar datos.</div>;
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-bold tracking-tight">{{pascalCase featureName}}</h1>
+        {/* TODO: Add create button component */}
+      </div>
+
+      <div className="grid gap-4">
+        {/* Aquí renderizas tu lista o tabla */}
+        <pre className="p-4 bg-gray-100 rounded-md text-xs">
+          {JSON.stringify(data, null, 2)}
+        </pre>
+      </div>
+    </div>
+  );
+};
+
+// Default export para facilitar Lazy Loading en Router
+export default {{pascalCase featureName}}View;

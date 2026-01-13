@@ -1,0 +1,31 @@
+import { ReactNode, useMemo } from 'react';
+
+{{#if isShared}}
+// 🌍 Contexto Global: Ruta absoluta a src/shared
+import { {{pascalCase name}}Context, {{pascalCase name}}State } from '@/shared/context/{{kebabCase name}}';
+{{else}}
+// 📦 Contexto de Feature: Ruta relativa (funciona en Flat y Modular)
+import { {{pascalCase name}}Context, {{pascalCase name}}State } from '../context/{{kebabCase name}}';
+{{/if}}
+
+interface {{pascalCase name}}ProviderProps {
+  children: ReactNode;
+}
+
+export function {{pascalCase name}}Provider({ children }: {{pascalCase name}}ProviderProps) {
+  
+  // TODO: Tu lógica (Queries, Effects, cálculos) va aquí
+  
+  const value = useMemo<{{pascalCase name}}State>(
+    () => ({
+      isLoading: false, 
+    }),
+    [] 
+  );
+
+  return (
+    <{{pascalCase name}}Context.Provider value={value}>
+      {children}
+    </{{pascalCase name}}Context.Provider>
+  );
+}

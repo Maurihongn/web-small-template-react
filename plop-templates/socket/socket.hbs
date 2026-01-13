@@ -1,0 +1,12 @@
+import { HubConnectionBuilder, LogLevel, HubConnection } from '@microsoft/signalr';
+
+export const create{{pascalCase name}}Connection = (url: string, token?: string): HubConnection => {
+  return new HubConnectionBuilder()
+    .withUrl(url, {
+      accessTokenFactory: () => token || '',
+      withCredentials: true,
+    })
+    .withAutomaticReconnect()
+    .configureLogging(LogLevel.Information)
+    .build();
+};
