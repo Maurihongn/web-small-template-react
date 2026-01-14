@@ -174,6 +174,7 @@ Respetar los sufijos ayuda a identificar el rol del archivo inmediatamente.
 - **Servicios:** `camelCase` + `.api` → `products.service.ts`
 - **Schemas:** `camelCase` + `.schema` → `login.schema.ts`
 
+
 ---
 
 ## 🚀 GitFlow Simplificado (Small Team)
