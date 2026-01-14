@@ -1,20 +1,20 @@
-import { axiosClient } from '@/shared/lib/axios-client';
+import { api } from '@/shared/lib/api/client';
 import { {{pascalCase featureName}} } from '../types'; // Asumiendo que crearás tipos
 
 // 🧠 URL Dinámica: Si hay módulo, lo prepone. Si no, usa solo la feature.
 const ENDPOINT = '{{#if moduleName}}/{{kebabCase moduleName}}{{/if}}/{{kebabCase featureName}}';
 
 export const get{{pascalCase featureName}}List = async (): Promise<{{pascalCase featureName}}[]> => {
-  const { data } = await axiosClient.get(ENDPOINT);
+  const { data } = await api.get(ENDPOINT);
   return data;
 };
 
 export const get{{pascalCase featureName}}ById = async (id: string): Promise<{{pascalCase featureName}}> => {
-  const { data } = await axiosClient.get(`${ENDPOINT}/${id}`);
+  const { data } = await api.get(`${ENDPOINT}/${id}`);
   return data;
 };
 
 export const create{{pascalCase featureName}} = async (payload: unknown) => {
-  const { data } = await axiosClient.post(ENDPOINT, payload);
+  const { data } = await api.post(ENDPOINT, payload);
   return data;
 };

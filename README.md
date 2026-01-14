@@ -1,6 +1,56 @@
 # 📘 Frontend Architecture (SPA / Lightweight)
 
-> **Tipo:** Single Page Application (Lightweight)
+> ⚠️ **IMPORTANTE:** Este repositorio es solo un _template_ público:  
+> No se aceptan Pull Requests ni Issues. Si necesitas usarlo, crea un fork o usa el botón **"Use this template"** de GitHub.  
+> Las Pull Requests enviadas por otros usuarios son cerradas automáticamente mediante un GitHub Action.
+
+## 🚀 Clonar este repositorio como template para tu propio proyecto
+
+Puedes crear tu propio proyecto a partir de este template siguiendo estos pasos:
+
+### Desde Github
+
+> Ir a https://github.com/Maurihongn/web-small-template-react y apretar la opcion **Use this template**
+
+--- O podes hacerlo desde la terminal ---
+
+### 1. Clona el template
+
+```bash
+git clone https://github.com/Maurihongn/web-small-template-react.git nombre-de-tu-nuevo-proyecto
+cd nombre-de-tu-nuevo-proyecto
+```
+
+### 2. Elimina la carpeta `.git` inicial(opcional por consola o con el explorador de windows)
+
+> **Linux/Mac (Terminal):**
+> ```bash
+> rm -rf .git
+> ```
+>
+> **Windows (PowerShell):**
+> ```powershell
+> Remove-Item -Recurse -Force .git
+> ```
+
+### 3. Inicializa tu propio repositorio (opcional por consola o hacelo por la interfaz grafica)
+
+```bash
+git init
+git remote add origin https://github.com/TU-USUARIO/NUEVO-REPO.git
+git add .
+git commit -m "init from template"
+git push -u origin main
+```
+
+---
+
+> **En resumen:**  
+> 1. Clona este repo.
+> 2. Elimina la carpeta `.git` según tu sistema operativo.
+> 3. Inicializa y configura tu propio repositorio en GitHub.
+
+> **Tipo:** Single Page Application (Lightweight)  
 > **Stack:** React 19 + Vite + TypeScript
 > **Arquitectura:** Feature-Based Architecture (Strict)
 
@@ -21,7 +71,7 @@ Antes de escribir una sola línea de código, completa estos pasos obligatorios:
     Busca globalmente la cadena `// TODO:` en tu editor (`Ctrl + Shift + F`). Hemos dejado marcadores en lugares críticos que debes actualizar:
     -   `package.json`: Nombre y versión del proyecto.
     -   `index.html`: Título de la pestaña y meta tags.
-    -   `src/shared/lib/axios-client.ts`: Configuración de la Base URL.
+    -   `src/shared/lib/api/client.ts`: Configuración de la Base URL.
     -   `src/app/routes.tsx`: Rutas iniciales.
 
 3.  **Instalación:**

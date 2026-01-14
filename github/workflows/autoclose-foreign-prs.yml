@@ -1,0 +1,17 @@
+name: Auto-close Pull Requests from other users
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  autoclose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close PR if not created by owner
+        if: github.actor != 'Maurihongn'
+        uses: peter-evans/close-pull@v3
+        with:
+          comment: |
+            ⚠️ ¡Este repositorio es solo un template! 
+            PRs externas se cierran automáticamente. Si necesitas usar el código, haz un fork o usa el botón "Use this template".
